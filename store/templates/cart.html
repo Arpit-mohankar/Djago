@@ -1,0 +1,23 @@
+<h1 style="text-align: center; color: #333;">🛒 Your Cart</h1>
+
+{% if cart %}
+    <ul style="list-style: none; padding: 0; max-width: 600px; margin: auto;">
+        {% for key, item in cart.items %}
+            <li style="display: flex; justify-content: space-between; align-items: center; background: #f9f9f9; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <div>
+                    <strong>{{ item.name }}</strong><br>
+                    ₹{{ item.price }} × {{ item.quantity }}
+                </div>
+                <a href="{% url 'remove_from_cart' key %}" style="background: #ff4d4d; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none;">Remove</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p style="text-align: center; font-size: 18px;"><strong>Total:</strong> ₹{{ total }}</p>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'checkout' %}" style="background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Proceed to Checkout</a>
+    </div>
+{% else %}
+    <p style="text-align: center; color: gray;">Your cart is empty.</p>
+{% endif %}
