@@ -26,11 +26,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-j9#^!cek*8d9cbh&zo51*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'djago-bdoj.onrender.com ,localhost,127.0.0.1').split(',')
-=======
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'djago-bdoj.onrender.com,localhost,127.0.0.1').split(',')
->>>>>>> 8a5c188d4be1cc339d4e00c38d8cee262d9c3a19
+
 
 
 # Application definition
