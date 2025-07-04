@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "store"
+    "store",
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +133,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'djzex5jxd',
+    'API_KEY': '862811758289822',
+    'API_SECRET': 'drAgqMshXZJtKGVX5mjAXMO7n3U'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # ALLOWED_HOSTS is now set above using environment variables
 
