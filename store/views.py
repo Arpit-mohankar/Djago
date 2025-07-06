@@ -1,5 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
+from django.shortcuts import render, redirect
+from .forms import SignUpForm
+from django.contrib.auth.decorators import login_required
+
 
 def product_list(request):
     products = Product.objects.all()
@@ -25,13 +29,13 @@ def add_to_cart(request, pk):
     request.session['cart'] = cart
     return redirect('view_cart')
 
-
+@login_required
 def view_cart(request):
     cart = request.session.get('cart', {})
     total = sum(item['price'] * item['quantity'] for item in cart.values())
     return render(request, 'cart.html', {'cart': cart, 'total': total})
 
-
+@login_required
 def remove_from_cart(request, pk):
     cart = request.session.get('cart', {})
     if str(pk) in cart:
@@ -39,8 +43,18 @@ def remove_from_cart(request, pk):
     request.session['cart'] = cart
     return redirect('view_cart')
 
-
+@login_required
 def checkout(request):
     # For now, we'll just clear the cart and show a thank-you page
     request.session['cart'] = {}
     return render(request, 'checkout.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # redirects to Django's built-in login
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})

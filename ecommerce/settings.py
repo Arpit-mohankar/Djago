@@ -28,6 +28,9 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'djago-bdoj.onrender.com']
 
+LOGIN_URL = 'login/'
+LOGIN_REDIRECT_URL = 'product/'
+# LOGOUT_REDIRECT_URL = '/logout'
 
 
 # Application definition
