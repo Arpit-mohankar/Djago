@@ -125,6 +125,8 @@
     <div class="auth-bar">
       {% if user.is_authenticated %}
         <span>Hi {{ user.username }}</span>
+        <a href="{% url 'my_orders' %}">My Orders</a> |
+        <a href="{% url 'view_cart' %}">🛒 Cart</a>
         <form method="post" action="{% url 'logout' %}">
           {% csrf_token %}
           <button type="submit">Logout</button>
