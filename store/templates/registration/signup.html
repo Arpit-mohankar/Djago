@@ -7,42 +7,48 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #eef2f7;
+      background: linear-gradient(to right, #c2e9fb, #a1c4fd);
       margin: 0;
-      padding: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
     .form-container {
-      max-width: 450px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
+      width: 100%;
+      max-width: 440px;
+      background-color: #ffffff;
+      padding: 35px 30px;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
       text-align: center;
       color: #333;
       margin-bottom: 25px;
+      font-weight: 600;
     }
 
     label {
+      font-weight: 500;
+      color: #333;
       display: block;
       margin-bottom: 6px;
-      color: #444;
-      font-weight: 500;
     }
 
     input[type="text"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="email"] {
       width: 100%;
       padding: 10px 12px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-      transition: border-color 0.3s;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
     }
 
     input:focus {
@@ -52,22 +58,26 @@
 
     .text-danger {
       color: #e74c3c;
-      font-size: 14px;
+      font-size: 13px;
       margin-top: -10px;
       margin-bottom: 10px;
-      display: block;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     .btn {
-      display: inline-block;
-      width: 48%;
-      padding: 10px;
-      font-size: 15px;
-      text-align: center;
+      padding: 10px 0;
       border: none;
       border-radius: 6px;
+      width: 48%;
+      font-size: 15px;
       cursor: pointer;
-      margin-top: 10px;
+      transition: background-color 0.3s;
     }
 
     .btn-dark {
@@ -75,49 +85,53 @@
       color: #fff;
     }
 
+    .btn-dark:hover {
+      background-color: #000;
+    }
+
     .btn-default {
       background-color: #f1f1f1;
       color: #333;
       text-decoration: none;
-      line-height: 35px;
-      text-align: center;
       display: inline-block;
+      text-align: center;
+      line-height: 38px;
     }
 
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
+    .btn-default:hover {
+      background-color: #e2e2e2;
     }
   </style>
 </head>
 <body>
 
   <div class="form-container">
-    <h2>📝 Create Account</h2>
+    <h2>📝 Create Your Account</h2>
     <form method="POST" action="{% url 'signup' %}">
       {% csrf_token %}
 
       <label for="{{ form.username.id_for_label }}">Username</label>
       <input type="text" name="{{ form.username.name }}" value="{{ form.username.value }}" required>
       {% if form.username.errors %}
-        <span class="text-danger">{{ form.username.errors }}</span>
+        <div class="text-danger">{{ form.username.errors }}</div>
+      {% endif %}
+
+      <label for="{{ form.email.id_for_label }}">Email</label>
+      <input type="email" name="{{ form.email.name }}" value="{{ form.email.value }}" required>
+      {% if form.email.errors %}
+        <div class="text-danger">{{ form.email.errors }}</div>
       {% endif %}
 
       <label for="{{ form.password1.id_for_label }}">Password</label>
-      <input type="password" name="{{ form.password1.name }}" value="{{ form.password1.value }}" required>
+      <input type="password" name="{{ form.password1.name }}" required>
       {% if form.password1.errors %}
-        <span class="text-danger">{{ form.password1.errors }}</span>
+        <div class="text-danger">{{ form.password1.errors }}</div>
       {% endif %}
 
       <label for="{{ form.password2.id_for_label }}">Re-Type Password</label>
-      <input type="password" name="{{ form.password2.name }}" value="{{ form.password2.value }}" required>
+      <input type="password" name="{{ form.password2.name }}" required>
       {% if form.password2.errors %}
-        <span class="text-danger">{{ form.password2.errors }}</span>
+        <div class="text-danger">{{ form.password2.errors }}</div>
       {% endif %}
 
       <div class="actions">
